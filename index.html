@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Racket Listing Writer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Racket Listing Writer</h1>
+    <button id="settingsBtn" class="ghost" type="button">Settings</button>
+  </header>
+
+  <main>
+    <section class="card" id="inputCard">
+      <label for="model">Racket model</label>
+      <input id="model" type="text" placeholder="e.g. Wilson Pro Staff 97 v14" autocomplete="off">
+
+      <label for="photos">Photos <span class="hint">(front, back, both sides of the head, throat, grip &amp; butt cap)</span></label>
+      <input id="photos" type="file" accept="image/*" multiple>
+      <div id="thumbs" class="thumbs"></div>
+
+      <div class="row">
+        <div>
+          <label for="grip">Grip size <span class="hint">(optional)</span></label>
+          <select id="grip">
+            <option value="">Read from photos</option>
+            <option>4 (L0)</option>
+            <option>4 1/8 (L1)</option>
+            <option>4 1/4 (L2)</option>
+            <option>4 3/8 (L3)</option>
+            <option>4 1/2 (L4)</option>
+            <option>4 5/8 (L5)</option>
+          </select>
+        </div>
+        <div>
+          <label for="price">Price <span class="hint">(optional)</span></label>
+          <input id="price" type="text" inputmode="decimal" placeholder="$">
+        </div>
+      </div>
+
+      <label for="notes">Your notes <span class="hint">(optional: anything the photos don't show)</span></label>
+      <textarea id="notes" rows="3" placeholder="e.g. Strung with Luxilon ALU 4G at 52 lbs, small chip at 10 o'clock, new overgrip"></textarea>
+
+      <button id="generateBtn" type="button" class="primary">Write listing</button>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section class="card hidden" id="resultCard">
+      <div class="result-head">
+        <h2>Listing</h2>
+        <div class="grade-pick">
+          <label for="gradeOverride">Grade</label>
+          <select id="gradeOverride"></select>
+        </div>
+      </div>
+
+      <label>eBay title <span id="titleCount" class="hint"></span></label>
+      <div class="copy-row">
+        <input id="titleOut" type="text" maxlength="80">
+        <button type="button" data-copy="titleOut">Copy</button>
+      </div>
+
+      <label>eBay condition</label>
+      <p id="ebayCondition" class="pill"></p>
+
+      <label>Item specifics</label>
+      <table id="specificsOut" class="specs"></table>
+
+      <div id="checksOut"></div>
+
+      <label>Description preview</label>
+      <div id="previewOut" class="preview"></div>
+
+      <div class="actions">
+        <button type="button" class="primary" id="copyHtmlBtn">Copy description (HTML)</button>
+        <button type="button" id="copyTextBtn">Copy as plain text</button>
+      </div>
+      <p class="hint">In eBay, switch the description editor to <b>HTML</b> and paste.</p>
+    </section>
+  </main>
+
+  <dialog id="settings">
+    <form method="dialog">
+      <h2>Settings</h2>
+      <label for="apiKey">Anthropic API key</label>
+      <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off">
+      <p class="hint">Saved only on this device. Get one at console.anthropic.com.</p>
+
+      <label for="shopName">Shop name</label>
+      <input id="shopName" type="text" placeholder="e.g. Dad's Tennis Shop">
+
+      <label for="footer">Shipping &amp; returns text <span class="hint">(added to every listing)</span></label>
+      <textarea id="footer" rows="4"></textarea>
+
+      <div class="actions">
+        <button value="save" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
